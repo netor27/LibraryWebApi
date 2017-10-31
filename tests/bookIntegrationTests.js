@@ -9,9 +9,7 @@ describe('Book Crud Test', function() {
     it('Should allow a book to be posted and return a read and _id', function(done) {
         var bookPost = { title: 'new Book', author: 'Neto', genre: 'Fiction' };
         agent.post('/api/books')
-            .set('Accept', 'application/json')
             .send(bookPost)
-            .expect('Content-Type', 'application/json; charset=utf-8')
             .expect(201)
             .end(function(err, results) {
                 should.not.exist(err);
@@ -22,7 +20,7 @@ describe('Book Crud Test', function() {
     });
 
     afterEach(function(done) {
-        //Book.remove().exec();
+        Book.remove().exec();
         done();
     });
 });
