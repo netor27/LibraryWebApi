@@ -1,6 +1,6 @@
-var bookController = function(Book) {
+var bookController = function (Book) {
 
-    var post = function(req, res) {
+    var post = function (req, res) {
         var book = new Book(req.body);
 
         if (!req.body.title) {
@@ -8,20 +8,26 @@ var bookController = function(Book) {
             res.send('Title is required');
         }
         else {
-            book.save();
-            res.status(201);
-            res.send(book);
+            book.save(function (err) {
+                if (err) {
+                    res.status(500);
+                    res.send(err);
+                } else {
+                    res.status(201);
+                    res.send(book);
+                }
+            });
         }
     };
 
-    var get = function(req, res) {
+    var get = function (req, res) {
         var query = [];
 
         if (req.query.genre) {
             query.genre = req.query.genre
         }
 
-        Book.find(query, function(err, books) {
+        Book.find(query, function (err, books) {
             if (err)
                 res.status(500).send(err);
             else
