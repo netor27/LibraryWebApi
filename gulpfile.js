@@ -20,6 +20,12 @@ gulp.task('serve', function () {
 
 gulp.task('test', function () {
     env({ vars: { ENV: 'Test' } });
-    gulp.src('tests/*.js', { read: false })
-        .pipe(gulpMocha({ reporter: 'nyan' }));
+    gulp.src('tests/unitTests/*.js', { read: false })
+        .pipe(gulpMocha({ reporter: 'spec' }));
+}); 
+
+gulp.task('integrationTest', function () {
+    env({ vars: { ENV: 'Test' } });
+    gulp.src('tests/integrationTests/*.js', { read: false })
+        .pipe(gulpMocha({ reporter: 'spec' }));
 }); 
