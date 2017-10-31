@@ -7,6 +7,7 @@ var db = mongoose.connect('mongodb://libraryUser:LibraryMongoDBPassword@ds229415
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
 
 var bookRouter = require('./Routes/bookRoutes')();
